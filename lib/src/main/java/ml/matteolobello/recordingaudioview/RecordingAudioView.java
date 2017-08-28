@@ -184,18 +184,29 @@ public class RecordingAudioView extends RelativeLayout implements View.OnTouchLi
     /**
      * A dummy Validator, makes us avoid null checking every time
      */
-    private final CanRecordValidator DUMMY_CAN_RECORD_VALIDATOR = () -> true;
+    private final CanRecordValidator DUMMY_CAN_RECORD_VALIDATOR = new CanRecordValidator() {
+        @Override
+        public boolean canRecord() {
+            return true;
+        }
+    };
 
     /**
      * A dummy time tick Listener, makes us avoid null checking every time
      */
-    private final OnTimeTickListener DUMMY_ON_TIME_TICK_LISTENER = msOfRecording -> {
+    private final OnTimeTickListener DUMMY_ON_TIME_TICK_LISTENER = new OnTimeTickListener() {
+        @Override
+        public void onTimeTick(long durationOfRecording) {
+        }
     };
 
     /**
      * A dummy reach max time Listener, makes us avoid null checking every time
      */
-    private final OnReachMaxTimeListener DUMMY_ON_REACH_MAX_TIME_LISTENER = () -> {
+    private final OnReachMaxTimeListener DUMMY_ON_REACH_MAX_TIME_LISTENER = new OnReachMaxTimeListener() {
+        @Override
+        public void onReachMaxTime() {
+        }
     };
 
     public RecordingAudioView(Context context) {
@@ -225,8 +236,12 @@ public class RecordingAudioView extends RelativeLayout implements View.OnTouchLi
         mMicrophoneImageView.setColorFilter(mIconsColor);
         mMicrophoneImageView.setOnTouchListener(this);
 
-        mControlContainer.post(() -> mViewCenter = mControlContainer.getWidth() / 2 - mMicrophoneImageView.getWidth() / 2);
-
+        mControlContainer.post(new Runnable() {
+            @Override
+            public void run() {
+                mViewCenter = mControlContainer.getWidth() / 2 - mMicrophoneImageView.getWidth() / 2;
+            }
+        });
         mDestroyImageView.setColorFilter(mIconsColor);
         mDestroyImageView.animate().scaleX(0.0f).scaleY(0.0f).setDuration(0).start();
 
@@ -393,7 +408,12 @@ public class RecordingAudioView extends RelativeLayout implements View.OnTouchLi
         ValueAnimator anim = new ValueAnimator();
         anim.setIntValues(mIconsColor, mShakeForErrorIconColor);
         anim.setEvaluator(new ArgbEvaluator());
-        anim.addUpdateListener(valueAnimator -> mMicrophoneImageView.setColorFilter((Integer) valueAnimator.getAnimatedValue()));
+        anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                mMicrophoneImageView.setColorFilter((Integer) valueAnimator.getAnimatedValue());
+            }
+        });
         anim.setDuration(SHAKE_ERROR_ANIM_DURATION / 2);
         anim.addListener(new Animator.AnimatorListener() {
             @Override
@@ -405,7 +425,12 @@ public class RecordingAudioView extends RelativeLayout implements View.OnTouchLi
                 ValueAnimator anim = new ValueAnimator();
                 anim.setIntValues(mShakeForErrorIconColor, mIconsColor);
                 anim.setEvaluator(new ArgbEvaluator());
-                anim.addUpdateListener(valueAnimator -> mMicrophoneImageView.setColorFilter((Integer) valueAnimator.getAnimatedValue()));
+                anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                        mMicrophoneImageView.setColorFilter((Integer) valueAnimator.getAnimatedValue());
+                    }
+                });
                 anim.setDuration(SHAKE_ERROR_ANIM_DURATION / 2);
                 anim.start();
             }
@@ -548,7 +573,7 @@ public class RecordingAudioView extends RelativeLayout implements View.OnTouchLi
         mMediaRecorder.start();
     }
 
-    private void circularReveal(View originView, int revealViewColor, boolean fadeAfter) {
+    private void circularReveal(View originView, int revealViewColor, final boolean fadeAfter) {
         if (!mEnableRevealAnimation) {
             return;
         }

@@ -42,17 +42,20 @@ public class MainActivity extends AppCompatActivity implements
         mEnableErrorCheckBox = (CheckBox) findViewById(R.id.enable_error_check_box);
         mMaxMsEditText = (EditText) findViewById(R.id.max_recording_time_edit_text);
         mMaxMsSetButton = (Button) findViewById(R.id.max_recording_set_button);
-        mMaxMsSetButton.setOnClickListener(view -> {
-            String inputMsString = mMaxMsEditText.getText().toString();
-            if (TextUtils.isEmpty(inputMsString)) {
-                Toast.makeText(this, "Set a value, please", Toast.LENGTH_SHORT).show();
-                return;
+        mMaxMsSetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String inputMsString = mMaxMsEditText.getText().toString();
+                if (TextUtils.isEmpty(inputMsString)) {
+                    Toast.makeText(MainActivity.this, "Set a value, please", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                int ms = Integer.valueOf(inputMsString);
+                mRecordingAudioView.setMaxRecordingTime(ms);
+
+                Toast.makeText(MainActivity.this, "Max Recording Time: " + ms + "ms", Toast.LENGTH_SHORT).show();
             }
-
-            int ms = Integer.valueOf(inputMsString);
-            mRecordingAudioView.setMaxRecordingTime(ms);
-
-            Toast.makeText(this, "Max Recording Time: " + ms + "ms", Toast.LENGTH_SHORT).show();
         });
     }
 

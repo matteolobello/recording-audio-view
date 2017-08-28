@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 26
@@ -27,8 +26,4 @@ dependencies {
     compile project(":lib")
     compile 'com.android.support:appcompat-v7:26.+'
     testCompile 'junit:junit:4.12'
-}
-
-retrolambda {
-    javaVersion JavaVersion.VERSION_1_7
 }
