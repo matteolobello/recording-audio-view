@@ -13,8 +13,14 @@ repositories {
 compile 'ml.matteolobello.recordingaudioview:recordingaudioview:1.0'
 ```
 
-### How to use
-##### XML Attributes
+### How to use and customization
+##### AndroidManifest permissions
+```xml
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.RECORD_AUDIO" />
+```
+##### View XML Attributes
 ```xml
 <ml.matteolobello.recordingaudioview.RecordingAudioView
     android:id="@+id/record_audio_view"
