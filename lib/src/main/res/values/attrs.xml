@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RecordingAudioView">
+        <attr name="recAudioViewIconsColor" format="color" />
+        <attr name="recAudioViewRevealAnimEnabled" format="boolean" />
+        <attr name="recAudioViewRevealColor" format="color"/>
+        <attr name="recAudioViewRevealDestroyColor" format="color"/>
+        <attr name="recAudioViewMicImage" format="integer" />
+        <attr name="recAudioViewDestroyImage" format="integer" />
+        <attr name="recAudioViewFileName" format="string" />
+        <attr name="recAudioViewMaxRecordingMs" format="integer" />
+    </declare-styleable>
+</resources>
