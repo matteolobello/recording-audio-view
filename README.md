@@ -1,6 +1,8 @@
 # RecordingAudioView
 [![Download](https://api.bintray.com/packages/ohmylob/RecordingAudioView/RecordingAudioView/images/download.svg?version=RecordingAudioView) ](https://bintray.com/ohmylob/RecordingAudioView/RecordingAudioView/RecordingAudioView/link)
 
+![alt text](https://raw.githubusercontent.com/OhMyLob/RecordingAudioView/master/art/video.gif)
+
 ### Setup:
 Add these lines to your build.gradle file.
 ```
@@ -20,7 +22,7 @@ compile 'ml.matteolobello.recordingaudioview:recordingaudioview:1.0'
 <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 <uses-permission android:name="android.permission.RECORD_AUDIO" />
 ```
-##### View XML Attributes
+##### View Attributes
 ```xml
 <ml.matteolobello.recordingaudioview.RecordingAudioView
     android:id="@+id/record_audio_view"
