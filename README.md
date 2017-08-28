@@ -40,32 +40,32 @@ mRecordingAudioView.setRevealDestroyColor(Color.RED);
 mRecordingAudioView.setMaxRecordingTime(3000);
 mRecordingAudioView.setFileName("/sdcard/Hello.3gp");
 mRecordingAudioView.setNewActionListener(new RecordingAudioView.OnNewActionListener() {
-            @Override
-            public void onStartRecording() {
-            }
+        @Override
+        public void onStartRecording() {
+        }
 
-            @Override
-            public void onDoneRecording(File outputFile) {
-            }
+        @Override
+        public void onDoneRecording(File outputFile) {
+        }
 
-            @Override
-            public void onCancelRecording() {
-            }
-        });
-mRecordingAudioView.setMaxRecordingTimeReachListener(new                                    RecordingAudioView.OnReachMaxTimeListener() {
-            @Override
-            public void onReachMaxTime() {
-            }
-        });
+        @Override
+        public void onCancelRecording() {
+        }
+});
+mRecordingAudioView.setMaxRecordingTimeReachListener(new RecordingAudioView.OnReachMaxTimeListener() {
+        @Override
+        public void onReachMaxTime() {
+        }
+});
 mRecordingAudioView.setCanRecordValidator(new RecordingAudioView.CanRecordValidator() {
-            @Override
-            public boolean canRecord() {
-                return true;
-            }
-        });
+        @Override
+        public boolean canRecord() {
+            return true;
+        }
+});
 mRecordingAudioView.setOnTimeTickListener(new RecordingAudioView.OnTimeTickListener() {
-            @Override
-            public void onTimeTick(long durationOfRecording) {
-            }
-        });
+        @Override
+        public void onTimeTick(long durationOfRecording) {
+        }
+});
 ```
